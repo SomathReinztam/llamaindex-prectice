@@ -1,0 +1,9 @@
+.txt
+z.txt
+z1.py
+z2.py
+.env
+.venv
+
+__pycache__/
+.docs/
