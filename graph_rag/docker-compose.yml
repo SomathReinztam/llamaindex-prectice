@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   neo4j:
-    image: neo4j:latest  # docker pull neo4j:5.26.19-ubi9
+    image: neo4j:5.20.0  # docker pull neo4j:5.26.19-ubi9
     container_name: neo4j-db
     ports:
       - "7474:7474" # Neo4j Browser web interface

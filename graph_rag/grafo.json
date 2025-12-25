@@ -1,0 +1,78 @@
+{
+    "entities": [
+        {
+            "entity_name": "Santa Caterina",
+            "entity_type": "LUGAR",
+            "entity_description": "Idílico pueblo mencionado como el lugar donde se origina la familia Caruso."
+        },
+        {
+            "entity_name": "Sicily",
+            "entity_type": "LUGAR",
+            "entity_description": "Isla italiana que alberga el pueblo de Santa Caterina y la tradición culinaria."
+        },
+        {
+            "entity_name": "Caruso Family",
+            "entity_type": "ORGANIZACION",
+            "entity_description": "Linaje familiar interconectado con la rica tradición culinaria de Sicilia."
+        },
+        {
+            "entity_name": "Culinary Heritage",
+            "entity_type": "CONCEPTO",
+            "entity_description": "Patrimonio culinario que la familia Caruso ha preservado a través de generaciones."
+        },
+        {
+            "entity_name": "Flavors",
+            "entity_type": "CONCEPTO",
+            "entity_description": "Narrativa de sabores creada por los miembros de la familia Caruso."
+        },
+        {
+            "entity_name": "Food",
+            "entity_type": "CONCEPTO",
+            "entity_description": "Alimento que la familia Caruso ama profundamente."
+        }
+    ],
+    "relationships": [
+        {
+            "source_entity": "Santa Caterina",
+            "target_entity": "Sicily",
+            "relationship_type": "LOCALIZADO_EN",
+            "relationship_description": "El pueblo de Santa Caterina está situado en la isla de Sicilia."
+        },
+        {
+            "source_entity": "Caruso Family",
+            "target_entity": "Santa Caterina",
+            "relationship_type": "ORIGEN_EN",
+            "relationship_description": "El origen de la familia Caruso se encuentra en Santa Caterina."
+        },
+        {
+            "source_entity": "Caruso Family",
+            "target_entity": "Culinary Heritage",
+            "relationship_type": "INTERTWINE_WITH",
+            "relationship_description": "El linaje de la familia está entrelazado con la herencia culinaria."
+        },
+        {
+            "source_entity": "Caruso Family",
+            "target_entity": "Culinary Heritage",
+            "relationship_type": "KEEPERS_OF",
+            "relationship_description": "Los Carusos eran los guardianes del patrimonio culinario."
+        },
+        {
+            "source_entity": "Caruso Family",
+            "target_entity": "Flavors",
+            "relationship_type": "CONTRIBUTED_TO",
+            "relationship_description": "Cada miembro de la familia aportó su estilo único a la narrativa de sabores."
+        },
+        {
+            "source_entity": "Flavors",
+            "target_entity": "Food",
+            "relationship_type": "REFLECTS",
+            "relationship_description": "Los sabores reflejan el amor profundo de la familia por la comida."
+        },
+        {
+            "source_entity": "Caruso Family",
+            "target_entity": "Food",
+            "relationship_type": "LOVE_FOR",
+            "relationship_description": "La familia Caruso tiene un amor profundo por la comida."
+        }
+    ]
+}

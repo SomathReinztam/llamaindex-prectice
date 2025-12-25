@@ -1,0 +1,12 @@
+services:
+  pgvector:
+    build: .
+    container_name: graph-pgvector-db
+    environment:
+      POSTGRES_USER: langchain
+      POSTGRES_PASSWORD: langchain
+      POSTGRES_DB: langchain
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data

@@ -1,0 +1,22 @@
+FROM pgvector/pgvector:pg16
+
+# Instalar dependencias necesarias para AGE
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    git \
+    postgresql-server-dev-16 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Clonar Apache AGE
+RUN git clone https://github.com/apache/age.git /age
+
+WORKDIR /age
+
+# Compilar e instalar AGE
+RUN make install
+
+# Copiar script de inicialización
+COPY initdb/init-age.sql /docker-entrypoint-initdb.d/
+
+WORKDIR /
