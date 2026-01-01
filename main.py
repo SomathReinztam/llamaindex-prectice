@@ -8,7 +8,7 @@ load_dotenv()
 CONNECTION = os.getenv("CONNECTION")
 
 
-def main_(collection_file : str, embedding : Embeddings, embedding_lengt : int):
+def main_(collection_file : str, embedding : Embeddings, embedding_length : int):
     # collection_file es un archivo por ahora .txt que se tiene indexado en un vectos store y si no lo está se indexa
     collection_name = Path(collection_file).stem
     
@@ -21,7 +21,7 @@ def main_(collection_file : str, embedding : Embeddings, embedding_lengt : int):
         print("la collecion no está en la db. Se procede a indexarla")
         chunks = doc_chunkenizer(doc_file=collection_file)
         print("funckenizacion exitosa")
-        ids = create_collection(embedding=embedding, connection=CONNECTION, collection_name=collection_name, embedding_lengt=embedding_lengt, text_chunks=chunks)
+        ids = create_collection(embedding=embedding, connection=CONNECTION, collection_name=collection_name, embedding_length=embedding_length, text_chunks=chunks)
         print(f"indexacion exitosa. Primeros 5 indices {ids[:5]}")
 
     PG_vector = SemanticSearchEngine(embedding=embedding, connection=CONNECTION, collection_name=collection_name)
@@ -52,7 +52,7 @@ if __name__=="__main__":
     from pathlib import Path
 
     root = Path(__file__).resolve().parent
-    collection_file = root / "mi_coleccion.txt"
+    collection_file = root / "_docs" / "dummytext.txt"
 
     load_dotenv()
     SERVER_AI_URL = os.getenv("SERVER_AI_URL")
@@ -60,7 +60,7 @@ if __name__=="__main__":
     model = "bge-m3:latest"
     embeddings_model = OllamaEmbeddings(model=model, base_url=SERVER_AI_URL)
 
-    embedding_lengt = 1024
+    embedding_length = 1024
 
     main_(collection_file, embeddings_model, 1024)
 

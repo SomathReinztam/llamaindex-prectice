@@ -12,7 +12,7 @@ st.set_page_config(page_title="Semantic Search Engine", layout="wide")
 
 # Cargar variables de entorno
 load_dotenv()
-CONNECTION = os.getenv("CONNECTION")
+CONNECTION = "postgresql://langchain:langchain@localhost:5432/langchain"
 SERVER_AI_URL = os.getenv("SERVER_AI_URL")
 
 # --- Funciones de Cache para optimizar ---

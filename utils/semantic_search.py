@@ -28,12 +28,12 @@ class SemanticSearchEngine:
 
 
 # Crea una colleccion de vectores, documentos, indices en postgres 
-def create_collection(embedding : Embeddings, connection : str, collection_name : str, embedding_lengt : int, text_chunks : List[str], metadatas : List[Dict] | None = None) -> List:
+def create_collection(embedding : Embeddings, connection : str, collection_name : str, embedding_length : int, text_chunks : List[str], metadatas : List[Dict] | None = None) -> List:
     vector_store = PGVector(
-            embedding=embedding,
+            embeddings=embedding,
             collection_name=collection_name,
             connection=connection,
-            embedding_lengt=embedding_lengt
+            embedding_length=embedding_length
         )
 
     ids = vector_store.add_texts(
@@ -56,12 +56,15 @@ def get_all_collections(connection : str) -> List[str]:
     """
     )
 
-    engine = create_engine(connection)
-    with engine.connect() as conn:
-        pks = conn.execute(query).fetchall()
-    collections = [coll for coll in pks[0]]
-
-    return collections
+    try:
+        engine = create_engine(connection)
+        with engine.connect() as conn:
+            pks = conn.execute(query).fetchall()
+        collections = [coll for coll in pks[0]]
+        return collections
+    except:
+        print("No hay ninguna coleccion")
+        return []
 
 
 
