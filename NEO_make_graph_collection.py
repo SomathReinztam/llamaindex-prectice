@@ -1,7 +1,7 @@
 from typing import Tuple
 from graph_rag.prompts import SYSTEM_ENTITY_RELATIONSHIP_EXTRACTION_PROMPT_1, HUMAN_ENTITY_RELATIONSHIP_EXTRACTION_PROMPT_1
 from graph_rag.neo_utils import create_entity, create_relationship
-from graph_rag.models import ChunkModel, EntityModel, RelationModel
+from graph_rag.models import ChunkModel, EntityModel, RelationModel, CollectionModel
 
 from langchain_community.document_loaders import TextLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -23,6 +23,7 @@ def make_graph_collection(
         neo_connection : Tuple[str, str, str],  # uri, user, password,      uri example: "bolt://localhost:7687"
         llm : BaseChatModel,
         model_embedding : Embeddings,
+        collection_name : str
 ):
     """
     Se hace la suposicion que las tablas ChunkModel, EntityModel, RelationModel en bd de graph_rag del ususario postgres ya existen !!!!!
@@ -43,6 +44,14 @@ def make_graph_collection(
     engine = create_engine(pg_connection)
     Session = sessionmaker(bind=engine)
     session = Session()
+
+
+    collection_db = CollectionModel(
+         collection_name=collection_name
+    )
+    session.add(collection_db)
+    session.flush()
+
 
     uri, user, password = neo_connection
     driver = GraphDatabase.driver(uri=uri, auth=(user, password))
@@ -135,8 +144,11 @@ def make_graph_collection(
 
             id_chunk += 1
         except Exception as e:
+            id_chunk += 1
             print("="*20)
-            print(f"Error procesando chunk {j+1}: \n {e}\n")
+            print(f"Error procesando chunk {j+1}: \n {e}\n\n\n")
+            print(ai_message.content)
+            print("\n\n\n")
             print("="*20)
             print("\n"*5)
         

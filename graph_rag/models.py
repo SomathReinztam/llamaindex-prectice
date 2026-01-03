@@ -5,7 +5,7 @@ Este script al ejecutarse como main crea una base de datos llamada graph_rag de 
 
 Nota.
 
-Se supone que existe un usuario postgres llamado postgres y una base de datos llamado langchain
+Se supone que existe un usuario postgres llamado postgres y una base de datos llamado graph_rag
 """
 
 
@@ -27,6 +27,10 @@ class ChunkModel(Base):
 
     entities = relationship("EntityModel", back_populates="chunk")
     relations = relationship("RelationModel", back_populates="chunk")
+
+    # Foreign Key
+    collection_id = mapped_column(ForeignKey("collections.collection_id"))
+    collection = relationship("CollectionModel", back_populates="chunks")
 
 
 class EntityModel(Base):
@@ -59,6 +63,19 @@ class RelationModel(Base):
     # Foreign Key
     relation_chunk_id = mapped_column(ForeignKey("chunks.chunk_id"))
     chunk = relationship("ChunkModel", back_populates="relations")
+
+
+
+class CollectionModel(Base):
+    __tablename__ = "collections"
+
+    collection_name = Column(String)
+    collection_id = Column(Integer, primary_key=True, autoincrement=True)
+
+    #chunk = relationship("ChunkModel", back_populates="collection")
+    chunks = relationship("ChunkModel", back_populates="collection")
+
+
 
 
 if __name__ == "__main__":
